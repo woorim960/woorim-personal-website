@@ -6,6 +6,6 @@ declare module "styled-components" {
     POINT_COLOR: string;
     BLACK_BURGUNDY: string;
     CLEAN_BLUE: string;
-    LIGHT_GREY: string;
+    SIMPLE_GREY: string;
   }
 }

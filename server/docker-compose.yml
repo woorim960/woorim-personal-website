@@ -7,6 +7,8 @@ services:
     container_name: dev-portfolio-mysql
     ports:
       - ${DB_PORT}:3306
+    networks:
+      - dev-portfolio
     volumes:
       - ./.db/etc/my.cnf:/etc/my.cnf
       - ./.db/etc/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
@@ -28,6 +30,11 @@ services:
     container_name: dev-portfolio-nodejs-container
     ports:
       - ${PORT}:${PORT}
+    networks:
+      - dev-portfolio
     env_file:
       - ../config/.server.env
     restart: always
+
+networks:
+  dev-portfolio:

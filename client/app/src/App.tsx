@@ -1,4 +1,3 @@
-/* This is imported components of dev-portfolio library */
 import {
   Header,
   Gallery,
@@ -7,20 +6,29 @@ import {
   Intro,
   Skill,
   ProgressBar,
+  VisitorCounter,
+  VisitorComment,
 } from "dev-portfolio";
+
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import useComment from "./hooks/useComment";
 import "./App.css";
 import COLOR from "./common/style/theme";
-<Item />;
+import countAPI from "./apis/count";
 
 function App() {
-  /**
-   * If you want to view README.md of 'dev-portfolio', go to the link below.
-   * {@link https://github.com/modern-agile-team/dev-portfolio#readme}
-   */
+  const [todayCounter, setTodayCounter] = useState<number>(0);
+  const [totalCounter, setTotalCounter] = useState<number>(0);
 
-  /* These are variables and handler functions used in VisitorComment component. */
+  useEffect(() => {
+    (async () => {
+      const result = await countAPI.getCount();
+      setTodayCounter(result.todayCount);
+      setTotalCounter(result.totalCount);
+    })();
+  }, []);
+
   const {
     comment,
     commentList,
@@ -39,8 +47,8 @@ function App() {
         logoOption={{
           redirectUrl: "/",
           title: "기본에 충실한 개발자",
-          logoImg: "./favicon.ico",
-          logoHidden: true,
+          logoImg: "./박우림_일러스트.png",
+          // logoHidden: true,
           titleColor: `${COLOR.CLEAN_BLUE}`,
           titleSize: "24px",
         }}
@@ -85,6 +93,22 @@ function App() {
           itemHoverdBackgroundColor: `${COLOR.CLEAN_BLUE}`,
           backgroundColor: `${COLOR.POINT_COLOR}`,
         }}
+      />
+
+      <VisitorCounter
+        theme="big-size"
+        backgroundColor={COLOR.MAIN_COLOR}
+        size="14px"
+        title="조회수"
+        titleColor={COLOR.POINT_COLOR}
+        todayTitle="오늘"
+        todayTitleColor={COLOR.POINT_COLOR}
+        todayVisitor={todayCounter}
+        todayVisitorColor={COLOR.CLEAN_BLUE}
+        totalTitle="전체"
+        totalTitleColor={COLOR.POINT_COLOR}
+        totalVisitor={totalCounter}
+        totalVisitorColor={COLOR.CLEAN_BLUE}
       />
 
       <Intro
@@ -296,10 +320,41 @@ function App() {
         />
       </Gallery>
 
+      <VisitorComment
+        id="['방명록', 'fluent:comment-add-24-regular']"
+        backgroundColor={COLOR.MAIN_COLOR}
+        theme="basic" // 'basic' | 'box' | 'vertical'
+        inputBackgroundColor={COLOR.POINT_COLOR}
+        inputFontColor={COLOR.MAIN_COLOR}
+        inputPlacehoderColor={COLOR.SIMPLE_GREY}
+        userInputLineColor={COLOR.CLEAN_BLUE}
+        buttonColor={COLOR.CLEAN_BLUE}
+        listBackgroundColor={COLOR.POINT_COLOR}
+        listCommentColor={COLOR.MAIN_COLOR}
+        listNicknameColor={COLOR.CLEAN_BLUE}
+        listDateColor={COLOR.CLEAN_BLUE}
+        progressbarColor={COLOR.CLEAN_BLUE}
+        isShowScrollDownIcon={true}
+        scrollDownIconColor={COLOR.CLEAN_BLUE}
+        commentInputPlacehoder={{
+          descriptionPlaceholder: "방문 소감을 남겨주세요!",
+          nicknamePlaceholder: "닉네임",
+          passwordPlaceholder: "비밀번호",
+        }}
+        comment={comment} // Your fetched variable
+        nickname={nickname} // Your fetched variable
+        password={password} // Your fetched variable
+        commentList={commentList} // Your fetched variable
+        handleCreateComment={handleCreateComment} // Event handling variable
+        handleChangeDescription={handleChangeDescription} // Event handling variable
+        handleChangeNickname={handleChangeNickname} // Event handling variable
+        handleChangePassword={handleChangePassword} // Event handling variable
+      />
+
       <Contact
         id="['연락처', 'fluent:contact-card-20-regular']"
         title="만나서 반가워요."
-        titleColor={COLOR.MAIN_COLOR}
+        titleColor={COLOR.CLEAN_BLUE}
         subTitle="아래 버튼을 클릭하면 박우림에게 메일을 보낼 수 있어요 :D"
         subTitleColor={COLOR.MAIN_COLOR}
         buttonText={`"적극적" 이어야만 박우림을 가질 수 있어요!`}
@@ -307,6 +362,7 @@ function App() {
         buttonColor={COLOR.POINT_COLOR}
         buttonBorderColor={COLOR.CLEAN_BLUE}
         backgroundColor={COLOR.POINT_COLOR}
+        email="woorimprog@gmail.com"
         channels={[
           {
             name: "github",
@@ -332,19 +388,19 @@ function App() {
         aboutMeInfos={[
           {
             title: "사 는 곳",
-            titleColor: `${COLOR.MAIN_COLOR}`,
+            titleColor: `${COLOR.CLEAN_BLUE}`,
             description: "대한민국 서울시 동대문구",
             descriptionColor: `${COLOR.MAIN_COLOR}`,
           },
           {
             title: "모 바 일",
-            titleColor: `${COLOR.MAIN_COLOR}`,
+            titleColor: `${COLOR.CLEAN_BLUE}`,
             description: "T. +82 (0)10 0000 0000",
             descriptionColor: `${COLOR.MAIN_COLOR}`,
           },
           {
             title: "이 메 일",
-            titleColor: `${COLOR.MAIN_COLOR}`,
+            titleColor: `${COLOR.CLEAN_BLUE}`,
             description: "woorimprog@gmail.com",
             descriptionColor: `${COLOR.MAIN_COLOR}`,
           },
