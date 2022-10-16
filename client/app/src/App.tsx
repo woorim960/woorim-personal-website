@@ -111,6 +111,8 @@ function App() {
         totalVisitorColor={COLOR.CLEAN_BLUE}
       />
 
+      <UnderLine></UnderLine>
+
       <Intro
         id="['핵심 소개', 'clarity:cursor-hand-open-line']"
         backgroundColor={COLOR.MAIN_COLOR}
@@ -336,11 +338,9 @@ function App() {
         progressbarColor={COLOR.CLEAN_BLUE}
         isShowScrollDownIcon={true}
         scrollDownIconColor={COLOR.CLEAN_BLUE}
-        commentInputPlacehoder={{
-          descriptionPlaceholder: "방문 소감을 남겨주세요!",
-          nicknamePlaceholder: "닉네임",
-          passwordPlaceholder: "비밀번호",
-        }}
+        descriptionPlaceholder="방명록을 남겨주세요 :D"
+        nicknamePlaceholder="닉네임"
+        passwordPlaceholder="비밀번호"
         comment={comment} // Your fetched variable
         nickname={nickname} // Your fetched variable
         password={password} // Your fetched variable
@@ -455,4 +455,8 @@ const SkillBox = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
+`;
+
+const UnderLine = styled.hr`
+  border: 0.5px dashed ${COLOR.SIMPLE_GREY};
 `;
